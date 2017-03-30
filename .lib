@@ -1,0 +1,26 @@
+if [ -f ~/.bashrc ]; then
+ . ~/.bashrc
+fi
+
+SCRIPT_EXECDIR=`pwd`
+
+MAIL_LST="root@example.com"
+
+if [ -z "$1" ] ; then
+
+  # No script passed
+  SCRIPT_DIR=""
+  SCRIPT_NAME=""
+  SCRIPT_LOGDIR=""
+
+else
+ cd `dirname $1`
+ SCRIPT_DIR=`pwd`
+ SCRIPT_NAME=`basename $1 | sed -e 's/\.sh$//'`
+fi
+
+if [ -n "$1" ] ; then
+ SCRIPT_LOGDIR="${SCRIPT_DIR}/logs"
+ mkdir -p ${SCRIPT_LOGDIR}
+ cd ${SCRIPT_EXECDIR}
+fi
